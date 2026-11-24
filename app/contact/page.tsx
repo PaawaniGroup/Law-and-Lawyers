@@ -1,8 +1,9 @@
 import { ContactForm } from "@/components/ContactForm";
 import { MapCard } from "@/components/MapCard";
+import { OfficePhoto } from "@/components/OfficePhoto";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/Section";
-import { site } from "@/content/site";
+import { photos, site } from "@/content/site";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
@@ -55,6 +56,13 @@ export default function ContactPage() {
                 </dd>
               </div>
             </dl>
+
+            <OfficePhoto
+              photo={photos.corridor}
+              className="mt-12"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              caption="The office · House No. 1380, Ganga Enclave"
+            />
 
             <div className="mt-12">
               <MapCard />

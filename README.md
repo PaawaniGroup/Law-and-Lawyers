@@ -108,6 +108,12 @@ What is built in:
 
 **Motion.** Slow (900ms, `cubic-bezier(.2,.7,.1,1)`); at most one entrance effect per section. Hero headline and drawing are pure CSS (they never wait for JavaScript). Scroll reveals (hairline draw, line-by-line mask, clip-path wipe) use Framer Motion's `inView` and `animate`. Lenis smooth scrolling starts only when the visitor has not asked for reduced motion. Under `prefers-reduced-motion` every animation is switched off in CSS and everything appears in its final state.
 
+**Dark panels ("night").** `.night` (in `globals.css`) re-maps the colour tokens for everything inside it, so any section or block can go near-black with no component changes: pass `tone="night"` to `Section`, or add the class to a wrapper. Used for the hero map panel, "Whom we act for", "Principles", practice-page heroes, "Vision & Mission" and the footer. `npm run check:contrast` covers these pairs too.
+
+**Law-themed line drawings** (`lib/emblems.ts`, `components/Emblem.tsx`): scales, court portico, open law book, a file tied with red tape, gavel. Same 1.25px monoline as the practice glyphs. The State Emblem of India and the Ashoka Chakra are deliberately **not** used (restricted by the State Emblem of India (Prohibition of Improper Use) Act, 2005). Note: the original brief banned gavel and scales clip art; these are custom line drawings added at the firm's request.
+
+**Photographs.** Office photos supplied by the firm are in `public/photos/` (resized to 2000-2400px, all EXIF and GPS data stripped) and declared in the `photos` export of `content/site.ts`; they are served as AVIF/WebP by `next/image`. A photo of a client meeting was left out on purpose (confidentiality). Real portraits of the partners are still needed (see "Photographs" above).
+
 **Graphics** (all custom SVG, no stock imagery):
 
 | Asset | Where |

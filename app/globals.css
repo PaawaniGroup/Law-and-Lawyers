@@ -18,6 +18,7 @@
   --oxblood: #7a2430;
   --brass: #a88a55;
   --brass-ink: #6e5a2e;
+  --night: #080909;
   --rule: rgba(22, 25, 29, 0.14);
   --focus: var(--oxblood);
   --emboss-hi: rgba(255, 255, 255, 0.75);
@@ -442,6 +443,44 @@ em,
   .ledger-margin::before {
     display: none;
   }
+}
+
+/* ------------------------------------------------------------------
+   NIGHT: near-black panels. Re-maps the colour tokens for everything inside,
+   so components need no special cases. Same values in light and dark themes.
+------------------------------------------------------------------- */
+.night,
+.section.night {
+  --paper: #080909;
+  --paper-2: #111413;
+  --ink: #ece6da;
+  --ink-2: #a9a398;
+  --rule: rgba(236, 230, 218, 0.16);
+  --brass: #c2a574;
+  --brass-ink: #c2a574;
+  --oxblood: #c9707a;
+  --evergreen: #8fb5a4;
+  --focus: #ece6da;
+  --emboss-hi: rgba(255, 255, 255, 0.05);
+  --grain-filter: invert(1);
+  --row-hover: #111413;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Law-themed line drawings: 1.25px at any size */
+.emblem {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.emblem path {
+  vector-effect: non-scaling-stroke;
+}
+.emblem .tape {
+  stroke: var(--oxblood);
 }
 
 /* ------------------------------------------------------------------

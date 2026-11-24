@@ -5,7 +5,7 @@ import { Glyph } from "./Glyph";
 import { RevealRule } from "./Reveal";
 
 /** Editorial numbered index of the ten practice areas. Rows, not cards. */
-export function PracticeIndex({ idPrefix = "pi" }: { idPrefix?: string }) {
+export function PracticeIndex({ idPrefix = "pi", alwaysGlyph = false }: { idPrefix?: string; alwaysGlyph?: boolean }) {
   return (
     <ol aria-label="Practice areas">
       {site.practiceAreas.map((p, i) => (
@@ -16,7 +16,7 @@ export function PracticeIndex({ idPrefix = "pi" }: { idPrefix?: string }) {
             <h3 className="t-h3">{p.title}</h3>
             <p className="t-small ink-2 md:pr-4">{p.intro}</p>
             <span className="pr-glyph text-ink">
-              <Glyph slug={p.slug} size={32} drawOnHover />
+              <Glyph slug={p.slug} size={alwaysGlyph ? 40 : 32} drawOnHover={!alwaysGlyph} />
             </span>
             <Arrow className="pr-arrow" />
           </Link>

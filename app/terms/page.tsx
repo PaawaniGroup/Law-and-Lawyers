@@ -10,5 +10,5 @@ export const metadata = pageMeta({
 
 export default function TermsPage() {
   const t = legal.terms;
-  return <LegalPage eyebrow="Legal" title={t.title} updated={t.updated} intro={t.intro} sections={t.sections} />;
+  return <LegalPage eyebrow="Legal" title={t.title} updated={t.updated} intro={t.intro} sections={t.sections} emblem="gavel" />;
 }

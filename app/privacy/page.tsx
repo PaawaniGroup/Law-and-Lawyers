@@ -11,5 +11,5 @@ export const metadata = pageMeta({
 
 export default function PrivacyPage() {
   const p = legal.privacy;
-  return <LegalPage eyebrow="Legal" title={p.title} updated={p.updated} intro={p.intro} sections={p.sections} />;
+  return <LegalPage eyebrow="Legal" title={p.title} updated={p.updated} intro={p.intro} sections={p.sections} emblem="book" />;
 }

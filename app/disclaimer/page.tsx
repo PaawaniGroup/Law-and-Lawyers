@@ -13,6 +13,7 @@ export default function DisclaimerPage() {
   const d = site.disclaimer;
   return (
     <LegalPage
+      emblem="scales"
       eyebrow="Legal"
       title={d.title}
       intro={d.lead.replace('By clicking "I Agree", you confirm', "By using this website you confirm")}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { Emblem } from "@/components/Emblem";
 import { PageHero } from "@/components/PageHero";
 import { PartnerCard } from "@/components/PartnerCard";
 import { Section } from "@/components/Section";
@@ -19,7 +20,7 @@ export default function PartnersPage() {
       {site.partners.map((p) => (
         <JsonLd key={p.slug} data={personJsonLd(p)} />
       ))}
-      <PageHero eyebrow="Partners" title="Two partners, working collaboratively." lead={site.partnersIntro} />
+      <PageHero eyebrow="Partners" title="Two partners, working collaboratively." lead={site.partnersIntro} aside={<Emblem name="file" size={230} />} />
       <Section id="profiles" num="01" label="Profiles" tone="paper-2">
         <div className="grid gap-x-12 gap-y-16 md:grid-cols-2">
           <PartnerCard partner={site.partners[0]} />

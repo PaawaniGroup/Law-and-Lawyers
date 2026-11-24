@@ -1,13 +1,15 @@
 import Link from "next/link";
+import { Emblem } from "@/components/Emblem";
 import { EnquiryBand } from "@/components/EnquiryBand";
 import { HeroMap } from "@/components/HeroMap";
 import { JsonLd } from "@/components/JsonLd";
 import { MaskLines } from "@/components/MaskLines";
+import { OfficePhoto } from "@/components/OfficePhoto";
 import { PartnerCard } from "@/components/PartnerCard";
-import { PracticeIndex } from "@/components/PracticeIndex";
+import { PracticeGrid } from "@/components/PracticeGrid";
 import { RevealRule, Wipe } from "@/components/Reveal";
 import { Section } from "@/components/Section";
-import { site } from "@/content/site";
+import { photos, site } from "@/content/site";
 import { pageMeta, personJsonLd } from "@/lib/seo";
 import { splitLines } from "@/lib/text";
 
@@ -52,7 +54,9 @@ export default function HomePage() {
             </div>
           </div>
           <div className="col-span-12 mx-auto w-full max-w-[520px] lg:col-span-5 lg:max-w-none">
-            <HeroMap />
+            <div className="night border border-rule p-3 sm:p-5">
+              <HeroMap />
+            </div>
           </div>
         </div>
         <div className="wrap">
@@ -66,35 +70,48 @@ export default function HomePage() {
       {/* § 01 THE FIRM */}
       <Section id="firm" num="01" label="The Firm" tone="paper-2">
         <RevealRule />
-        <p className="t-pull mt-8 max-w-[44ch] sm:max-w-[52ch] lg:max-w-[58ch]">{firm.intro}</p>
-        <p className="mt-10">
-          <Link href="/firm" className="link">
-            {site.cta.moreFirm} <span className="a">→</span>
-          </Link>
-        </p>
+        <div className="mt-8 grid items-start gap-x-14 gap-y-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+          <div>
+            <p className="t-pull max-w-[44ch] sm:max-w-[52ch]">{firm.intro}</p>
+            <p className="mt-10">
+              <Link href="/firm" className="link">
+                {site.cta.moreFirm} <span className="a">→</span>
+              </Link>
+            </p>
+          </div>
+          <OfficePhoto
+            photo={photos.corridor}
+            ratio="aspect-[4/5]"
+            position="45% 50%"
+            caption="The office · Ganga Enclave, Roorkee"
+          />
+        </div>
       </Section>
 
       {/* § 02 PRACTICE */}
       <Section id="practice" num="02" label="Practice">
         <p className="t-h3 ink-2 mb-10 max-w-[40ch]">{site.practiceIntro}</p>
-        <PracticeIndex />
+        <PracticeGrid />
       </Section>
 
       {/* § 03 WHOM WE ACT FOR */}
-      <Section id="clients" num="03" label="Whom we act for" tone="paper-2" tight>
-        <ul className="flex flex-wrap font-serif text-[clamp(1.0625rem,1.55vw,1.375rem)] leading-snug tracking-[-0.01em]">
-          {site.whomWeActFor.map((who, i) => (
-            <li key={who} className="whitespace-nowrap">
-              {who}
-              {i < site.whomWeActFor.length - 1 && (
-                <span aria-hidden="true" className="mx-[0.55em] text-brass-ink">
-                  ·
-                </span>
-              )}
-              <span className="sr-only">, </span>
-            </li>
-          ))}
-        </ul>
+      <Section id="clients" num="03" label="Whom we act for" tone="night">
+        <div className="grid items-center gap-x-16 gap-y-12 md:grid-cols-[minmax(0,1fr)_280px]">
+          <ul className="flex flex-wrap font-serif text-[clamp(1.375rem,2.6vw,2.125rem)] leading-[1.35] tracking-[-0.01em]">
+            {site.whomWeActFor.map((who, i) => (
+              <li key={who} className="whitespace-nowrap">
+                {who}
+                {i < site.whomWeActFor.length - 1 && (
+                  <span aria-hidden="true" className="mx-[0.55em] text-brass-ink">
+                    ·
+                  </span>
+                )}
+                <span className="sr-only">, </span>
+              </li>
+            ))}
+          </ul>
+          <Emblem name="portico" size={280} className="mx-auto text-brass" />
+        </div>
       </Section>
 
       {/* § 04 HOW WE WORK */}
@@ -125,21 +142,24 @@ export default function HomePage() {
       </Section>
 
       {/* § 06 PRINCIPLES */}
-      <Section id="principles" num="06" label="Principles">
-        <Wipe>
-          <ol className="ledger ledger-margin border-t border-rule lg:pl-14">
-            {firm.principles.map((pr, i) => (
-              <li
-                key={pr.name}
-                className="ledger-row grid items-center gap-x-6 gap-y-1 py-5 md:grid-cols-[56px_minmax(0,0.9fr)_minmax(0,1.6fr)] md:py-0"
-              >
-                <span className="label label-brass tnum">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="t-h3">{pr.name}</h3>
-                <p className="t-body ink-2">{pr.text.charAt(0).toUpperCase() + pr.text.slice(1)}</p>
-              </li>
-            ))}
-          </ol>
-        </Wipe>
+      <Section id="principles" num="06" label="Principles" tone="night">
+        <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1fr)_230px]">
+          <Wipe>
+            <ol className="ledger ledger-margin border-t border-rule lg:pl-14">
+              {firm.principles.map((pr, i) => (
+                <li
+                  key={pr.name}
+                  className="ledger-row grid items-center gap-x-6 gap-y-1 py-5 md:grid-cols-[56px_minmax(0,0.9fr)_minmax(0,1.6fr)] md:py-0"
+                >
+                  <span className="label label-brass tnum">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="t-h3">{pr.name}</h3>
+                  <p className="t-body ink-2">{pr.text.charAt(0).toUpperCase() + pr.text.slice(1)}</p>
+                </li>
+              ))}
+            </ol>
+          </Wipe>
+          <Emblem name="scales" size={230} className="mx-auto hidden self-start text-brass lg:block" />
+        </div>
       </Section>
 
       <EnquiryBand perf />

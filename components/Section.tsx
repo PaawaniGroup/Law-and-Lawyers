@@ -4,7 +4,7 @@ interface SectionProps {
   id: string;
   num: string;
   label: string;
-  tone?: "paper" | "paper-2";
+  tone?: "paper" | "paper-2" | "night";
   tight?: boolean;
   className?: string;
   contentClassName?: string;
@@ -29,7 +29,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={`${id}-label`}
-      className={["section", tone === "paper-2" ? "tone-2" : "", tight ? "tight" : "", className].filter(Boolean).join(" ")}
+      className={["section", tone === "paper-2" ? "tone-2" : tone === "night" ? "night" : "", tight ? "tight" : "", className].filter(Boolean).join(" ")}
     >
       <div className="wrap grid12">
         <div className="marg col-span-12 lg:col-span-2">

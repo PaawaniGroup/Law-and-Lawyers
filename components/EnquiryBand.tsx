@@ -12,7 +12,7 @@ export function EnquiryBand({ perf = false }: { perf?: boolean }) {
         <div
           aria-hidden="true"
           className="perf absolute left-0 right-0 top-0"
-          style={{ ["--perf-bg" as string]: "var(--paper)", marginBottom: 0 }}
+          style={{ ["--perf-bg" as string]: "var(--night)", marginBottom: 0 }}
         />
       )}
       <div className="wrap grid12 gap-y-14 py-[clamp(80px,10vw,150px)]">

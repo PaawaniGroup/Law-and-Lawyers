@@ -47,7 +47,28 @@ const pairs = [
   ["Gate: label (brass-ink) on paper panel", "brass-ink", "paper", 4.5],
 ];
 
+// Near-black "night" panels (hero map, dark sections, footer). Same values in both themes.
+const night = { paper: "#080909", "paper-2": "#111413", ink: "#ece6da", "ink-2": "#a9a398", "brass-ink": "#c2a574", oxblood: "#c9707a", evergreen: "#8fb5a4" };
+const nightPairs = [
+  ["Night: body text", "ink", "paper", 4.5],
+  ["Night: secondary text", "ink-2", "paper", 4.5],
+  ["Night: brass labels and numerals", "brass-ink", "paper", 4.5],
+  ["Night: oxblood placeholder text", "oxblood", "paper", 4.5],
+  ["Night: evergreen (sage) seal/links", "evergreen", "paper", 4.5],
+  ["Night: button, paper text on sage fill", "paper", "evergreen", 4.5],
+  ["Night: hover row (ink-2 on paper-2)", "ink-2", "paper-2", 4.5],
+  ["Night: focus ring (ink) vs panel, 3:1", "ink", "paper", 3],
+  ["Night: input/rule line (ink-2), 3:1", "ink-2", "paper", 3],
+];
+
 let failures = 0;
+console.log("\nNIGHT (dark panels, both themes)");
+for (const [desc, fg, bg, min] of nightPairs) {
+  const r = ratio(night[fg], night[bg]);
+  const ok = r >= min;
+  if (!ok) failures++;
+  console.log(`${ok ? "PASS" : "FAIL"}  ${r.toFixed(2).padStart(5)}:1  (needs ${min})  ${desc}`);
+}
 for (const [name, theme] of [["LIGHT", light], ["DARK", dark]]) {
   console.log(`\n${name}`);
   for (const [desc, fg, bg, min, alpha] of pairs) {

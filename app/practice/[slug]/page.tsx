@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Emblem } from "@/components/Emblem";
 import { EnquiryBand } from "@/components/EnquiryBand";
 import { Glyph } from "@/components/Glyph";
 import { MaskLines } from "@/components/MaskLines";
 import { Portrait } from "@/components/Portrait";
-import { RevealRule } from "@/components/Reveal";
 import { Section } from "@/components/Section";
 import { getPractice, partnersFor, site } from "@/content/site";
 import { pageMeta } from "@/lib/seo";
 import { splitLines } from "@/lib/text";
+import type { EmblemName } from "@/lib/emblems";
+
+/** Which line drawing sits beside each practice area. */
+const EMBLEM_FOR: Record<string, EmblemName> = {
+  "property-real-estate": "portico",
+  "land-revenue": "file",
+  "banking-finance": "book",
+  "corporate-commercial": "portico",
+  "regulatory-compliance": "file",
+  gst: "scales",
+  "income-tax": "scales",
+  "contracts-documentation": "book",
+  "intellectual-property": "gavel",
+  registrations: "file",
+};
 
 type Params = Promise<{ slug: string }>;
 
@@ -40,9 +55,9 @@ export default async function PracticeDetailPage({ params }: { params: Params })
 
   return (
     <>
-      {/* HERO: numeral, glyph, title, intro */}
-      <section aria-labelledby="page-title">
-        <div className="wrap grid12 gap-y-6 pb-[clamp(56px,8vw,112px)] pt-8 lg:pt-16">
+      {/* HERO (night): numeral, title, intro, large glyph */}
+      <section aria-labelledby="page-title" className="night border-y border-rule">
+        <div className="wrap grid12 items-center gap-y-8 py-[clamp(56px,8vw,112px)]">
           <div className="col-span-12 lg:col-span-2">
             <p className="label label-brass">Practice area</p>
             <p
@@ -53,14 +68,18 @@ export default async function PracticeDetailPage({ params }: { params: Params })
               {practice.num}
             </p>
           </div>
-          <div className="col-span-12 lg:col-span-9 lg:col-start-4">
-            <div className="text-evergreen">
+          <div className="col-span-12 lg:col-span-6 lg:col-start-4">
+            <div className="text-brass-ink lg:hidden">
               <Glyph slug={practice.slug} size={56} />
             </div>
-            <MaskLines tag="h1" id="page-title" lines={splitLines(practice.title, 24)} className="t-h1 mt-8" />
-            <p className="t-pull mt-8 max-w-[44ch] text-ink-2">
-              {practice.intro}
+            <MaskLines tag="h1" id="page-title" lines={splitLines(practice.title, 24)} className="t-h1 mt-8 lg:mt-0" />
+            <p className="t-pull mt-8 max-w-[44ch] text-ink-2">{practice.intro}</p>
+            <p className="label label-2 mt-8">
+              {practice.services.length} areas of work · {isFirm ? "Handled by the firm" : partners.map((p) => p.shortName).join(" · ")}
             </p>
+          </div>
+          <div className="hidden text-brass lg:col-span-3 lg:col-start-10 lg:block">
+            <Glyph slug={practice.slug} size={190} />
           </div>
         </div>
       </section>
@@ -68,21 +87,15 @@ export default async function PracticeDetailPage({ params }: { params: Params })
       {/* WHAT THIS COVERS + PARTNER PANEL */}
       <Section id="covers" num="A" label="What this covers" tone="paper-2">
         <div className="grid gap-x-16 gap-y-16 lg:grid-cols-[minmax(0,1fr)_280px]">
-          <ol>
+          <ol className="grid gap-x-10 md:grid-cols-2">
             {practice.services.map((service, i) => (
-              <li key={service}>
-                <RevealRule delay={Math.min(i * 0.05, 0.35)} />
-                <div className="grid grid-cols-[56px_minmax(0,1fr)] gap-x-4 py-4">
-                  <span className="label label-brass tnum pt-1.5">
-                    {major}.{i + 1}
-                  </span>
-                  <p className="t-body">{service}</p>
-                </div>
+              <li key={service} className="grid grid-cols-[52px_minmax(0,1fr)] gap-x-3 border-t border-rule py-5">
+                <span className="label label-brass tnum pt-1.5">
+                  {major}.{i + 1}
+                </span>
+                <p className="t-body">{service}</p>
               </li>
             ))}
-            <li aria-hidden="true">
-              <RevealRule delay={0.4} />
-            </li>
           </ol>
 
           <aside aria-labelledby="partners-heading" className="lg:pt-0">
@@ -105,6 +118,9 @@ export default async function PracticeDetailPage({ params }: { params: Params })
                 </li>
               ))}
             </ul>
+            <div className="mt-10 text-ink-2">
+              <Emblem name={EMBLEM_FOR[practice.slug] ?? "scales"} size={200} className="mx-auto" />
+            </div>
           </aside>
         </div>
       </Section>

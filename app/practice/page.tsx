@@ -1,5 +1,6 @@
 import { EnquiryBand } from "@/components/EnquiryBand";
 import { PageHero } from "@/components/PageHero";
+import { Emblem } from "@/components/Emblem";
 import { PracticeIndex } from "@/components/PracticeIndex";
 import { Section } from "@/components/Section";
 import { site } from "@/content/site";
@@ -15,9 +16,9 @@ export const metadata = pageMeta({
 export default function PracticePage() {
   return (
     <>
-      <PageHero eyebrow="Practice" title="Ten areas of practice." lead={site.practiceIntro} />
+      <PageHero eyebrow="Practice" title="Ten areas of practice." lead={site.practiceIntro} aside={<Emblem name="portico" size={230} />} />
       <Section id="index" num="01" label="Index">
-        <PracticeIndex idPrefix="px" />
+        <PracticeIndex idPrefix="px" alwaysGlyph />
       </Section>
       <EnquiryBand />
     </>
